@@ -2,6 +2,8 @@
 const htmlQuote = document.querySelector("#quote");
 const htmlAuthor = document.querySelector("#quote-author");
 
+
+
 //Get quote from API
 
 async function getQuote(){
@@ -18,6 +20,20 @@ async function getQuote(){
 
     htmlQuote.textContent =dataQuote;
     htmlAuthor.textContent = dataAuthor;
+
+    //Count number of characters in quote, if longer than x, change htmlQuote class to long-string
+
+    
+    const quoteParent = htmlQuote.parentElement;
+
+    if(dataQuote.length > 30 && quoteParent.classList !=="long-quote"){
+      quoteParent.classList.add("long-quote");
+      
+    }else if(dataQuote.length < 30 && quoteParent.classList ==="long-quote"){
+      quoteParent.classList.remove("long-quote");
+      
+    }
+    console.log(dataQuote.length);
 
   } catch (error) {
     getQuote();
