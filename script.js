@@ -1,3 +1,4 @@
+
 let apiQuotes = [];
 
 //Show new quote
@@ -7,6 +8,13 @@ function newQuote(){
   console.log(quote);
 }
 
+const quoteContainer = document.getElementById("quote-container");
+const quoteText = document.getElementById("quote");
+const authorText = document.getElementById("author");
+const twitterBtn = document.getElementById("twitter");
+const newQuoteBtn = document.getElementById("new-quote");
+
+
 //Get quote from API
 async function getQuotes(){
   
@@ -15,8 +23,14 @@ async function getQuotes(){
   try {
     const response = await fetch (apiUrl);
     apiQuotes = await response.json();
-    // console.log(apiQuotes[89]);
     newQuote();
+
+    // check if author text is empty, if so author.text will read "unknown"
+    if(quote.author === ""){
+      authorText.innerText = "Unknown";
+    }else{
+      authorText.innerText = quote.author;
+    }
     
   } catch (error) {
     //Catch error here
@@ -24,10 +38,6 @@ async function getQuotes(){
     console.log("whoops, its not working", error);
   }
 }
-
-  
-
-
 
 //Onload
 getQuotes();
