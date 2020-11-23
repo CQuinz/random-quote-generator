@@ -7,6 +7,7 @@ const authorText = document.getElementById("quote-author");
 const twitterBtn = document.getElementById("twitter");
 const newQuoteBtn = document.getElementById("new-quote");
 
+
 //Show new quote
 function newQuote(){
   //Pick a random quote for apiQutes array
@@ -48,8 +49,17 @@ async function getQuotes(){
   }
 }
 
+//Tweet quote
+const tweetQuote = () =>{
+  const twitterUrl = `https://twitter.com/intent/tweet?text=${quoteText.textContent} - ${authorText.textContent}`;
+  //Open tweet in a new tab
+  window.open(twitterUrl, '_blank');
+}
+
+
 // Add event listeners for buttons
 newQuoteBtn.addEventListener("click", getQuotes);
+twitterBtn.addEventListener("click", tweetQuote);
 
 //Onload
 getQuotes();
