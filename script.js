@@ -11,7 +11,7 @@ const newQuoteBtn = document.getElementById("new-quote");
 function newQuote(){
   //Pick a random quote for apiQutes array
   const quote = apiQuotes[Math.floor(Math.random()* apiQuotes.length)];
-  console.log(quote);
+  
 
 // check if author text is empty, if so author.text will read "unknown"
 if(quote.author === ""){
@@ -40,8 +40,6 @@ async function getQuotes(){
     const response = await fetch (apiUrl);
     apiQuotes = await response.json();
     newQuote();
-
-    
     
   } catch (error) {
     //Catch error here
@@ -49,6 +47,9 @@ async function getQuotes(){
     console.log("whoops, its not working", error);
   }
 }
+
+// Add event listeners for buttons
+newQuoteBtn.addEventListener("click", getQuotes);
 
 //Onload
 getQuotes();
