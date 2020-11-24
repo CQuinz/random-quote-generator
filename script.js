@@ -27,27 +27,29 @@ function newQuote(){
   const quote = apiQuotes[Math.floor(Math.random()* apiQuotes.length)];
   
 
-// check if author text is empty, if so author.text will read "unknown"
-if(quote.author === ""){
-  authorText.innerText = "Unknown";
-}else{
-  authorText.innerText = quote.author;
-}
+  // check if author text is empty, if so author.text will read "unknown"
+  if(quote.author === ""){
+    authorText.innerText = "Unknown";
+  }else{
+    authorText.innerText = quote.author;
+  }
 
-//Reduce font-size of quoteText if num of characters are greater than 120
-if(quote.text.length > 120){
-  quoteText.classList.add("long-quote");
-}else if(quote.text.length < 120){
-  quoteText.classList.remove("long-quote");
-}
-quoteText.innerText = quote.text;
+  //Reduce font-size of quoteText if num of characters are greater than 120
+  if(quote.text.length > 120){
+    quoteText.classList.add("long-quote");
+  }else if(quote.text.length < 120){
+    quoteText.classList.remove("long-quote");
+  }
+  // Set Quote and hide loader
+  quoteText.innerText = quote.text;
+  complete();
 
 }
 
 
 //Get quote from API
 async function getQuotes(){
-  
+  loading();
   const apiUrl = 'https://type.fit/api/quotes';
   
   try {
@@ -57,7 +59,7 @@ async function getQuotes(){
     
   } catch (error) {
     //Catch error here
-    getQuotes();
+    // getQuotes();
     console.log("whoops, its not working", error);
   }
 }
@@ -75,5 +77,4 @@ newQuoteBtn.addEventListener("click", getQuotes);
 twitterBtn.addEventListener("click", tweetQuote);
 
 //Onload
-// getQuotes();
-loading();
+getQuotes();
