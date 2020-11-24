@@ -46,7 +46,6 @@ function newQuote(){
 
 }
 
-
 //Get quote from API
 async function getQuotes(){
   loading();
