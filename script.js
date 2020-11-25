@@ -9,14 +9,13 @@ const newQuoteBtn = document.getElementById("new-quote");
 const loader = document.getElementById("loader");
 
 
-// Show loader
-const loading = () =>{
+
+const showLoadingSpinner = () =>{
   loader.hidden = false;
   quoteContainer.hidden = true;
 }
 
-// Complete
-const complete = () =>{
+const removeLoadingSpinner = () =>{
   loader.hidden = true;
   quoteContainer.hidden = false;
 }
@@ -42,13 +41,13 @@ function newQuote(){
   }
   // Set Quote and hide loader
   quoteText.innerText = quote.text;
-  complete();
+  removeLoadingSpinner();
 
 }
 
 //Get quote from API
 async function getQuotes(){
-  loading();
+  showLoadingSpinner();
   const apiUrl = 'https://type.fit/api/quotes';
   
   try {
